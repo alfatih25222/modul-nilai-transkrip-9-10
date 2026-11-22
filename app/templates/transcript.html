@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Transkrip Akademik - {{ transcript.biodata.nim }}</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 18mm 18mm 20mm 18mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Times New Roman", Georgia, serif;
+      color: #1a202c;
+      margin: 0;
+      padding: 0;
+      font-size: 11pt;
+      line-height: 1.4;
+      background: #ffffff;
+    }
+
+    .sheet {
+      border: 2px solid #1e3a5f;
+      padding: 18px 22px;
+      position: relative;
+    }
+
+    .sheet-inner {
+      border: 1px solid #c5a059;
+      padding: 16px 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 2.5px solid #1e3a5f;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .header-logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-title-wrap {
+      text-align: center;
+      flex: 1;
+    }
+
+    .doc-title {
+      font-size: 16pt;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      color: #1e3a5f;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+    }
+
+    .doc-subtitle {
+      font-size: 10pt;
+      color: #4a5568;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .biodata-box {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      background-color: #faf8f2;
+      border: 1px solid #d6cbb2;
+    }
+
+    .biodata-box td {
+      padding: 5px 10px;
+      font-size: 10.5pt;
+      vertical-align: top;
+    }
+
+    .bio-label {
+      width: 145px;
+      font-weight: bold;
+      color: #1e3a5f;
+    }
+
+    .bio-sep {
+      width: 12px;
+      text-align: center;
+    }
+
+    .semester-block {
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+    }
+
+    .semester-heading {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #1e3a5f;
+      background-color: #edf2f7;
+      border-left: 4px solid #c5a059;
+      padding: 5px 10px;
+      margin: 0 0 6px 0;
+    }
+
+    table.grade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+
+    table.grade-table th {
+      background-color: #1e3a5f;
+      color: #ffffff;
+      font-weight: bold;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #1e3a5f;
+    }
+
+    table.grade-table td {
+      padding: 5px 8px;
+      border: 1px solid #cbd5e0;
+    }
+
+    table.grade-table tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .text-center {
+      text-align: center !important;
+    }
+
+    .text-right {
+      text-align: right !important;
+    }
+
+    .semester-meta {
+      font-size: 9.5pt;
+      color: #2d3748;
+      text-align: right;
+      margin-top: 4px;
+      font-weight: bold;
+    }
+
+    .footer-summary {
+      margin-top: 18px;
+      border-top: 2px solid #1e3a5f;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      page-break-inside: avoid;
+    }
+
+    .summary-table {
+      border-collapse: collapse;
+      width: 52%;
+      font-size: 10.5pt;
+    }
+
+    .summary-table td {
+      padding: 5px 8px;
+      border: 1px solid #cbd5e0;
+    }
+
+    .summary-table td.label {
+      font-weight: bold;
+      background-color: #edf2f7;
+      color: #1e3a5f;
+      width: 55%;
+    }
+
+    .summary-table td.val {
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .signature-box {
+      width: 42%;
+      text-align: center;
+      font-size: 10pt;
+    }
+
+    .signature-role {
+      font-weight: bold;
+      color: #1e3a5f;
+      margin-bottom: 54px;
+    }
+
+    .signature-line {
+      border-top: 1px solid #1a202c;
+      display: inline-block;
+      min-width: 190px;
+      padding-top: 3px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="sheet-inner">
+      <div class="header">
+        {% if logo_uri %}
+          <img class="header-logo" src="/assets/logo_kampus.png" alt="Logo Universitas" />
+        {% endif %}
+        <div class="header-title-wrap">
+          <h1 class="doc-title">TRANSKRIP AKADEMIK</h1>
+          <p class="doc-subtitle">Dokumen Catatan Prestasi Studi Mahasiswa</p>
+        </div>
+      </div>
+
+      <table class="biodata-box">
+        <tr>
+          <td class="bio-label">NIM</td>
+          <td class="bio-sep">:</td>
+          <td>{{ transcript.biodata.nim }}</td>
+          <td class="bio-label">Program Studi</td>
+          <td class="bio-sep">:</td>
+          <td>{{ transcript.biodata.program_studi }}</td>
+        </tr>
+        <tr>
+          <td class="bio-label">Nama</td>
+          <td class="bio-sep">:</td>
+          <td>{{ transcript.biodata.nama }}</td>
+          <td class="bio-label">Angkatan</td>
+          <td class="bio-sep">:</td>
+          <td>{{ transcript.biodata.angkatan }}</td>
+        </tr>
+      </table>
+
+      {% if transcript.semesters %}
+        {% for sem in transcript.semesters %}
+          <div class="semester-block">
+            <h2 class="semester-heading">Semester {{ sem.semester }}</h2>
+            <table class="grade-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Kode MK</th>
+                  <th style="width: 45%;">Nama MK</th>
+                  <th class="text-center" style="width: 10%;">SKS</th>
+                  <th class="text-center" style="width: 12%;">Nilai</th>
+                  <th class="text-right" style="width: 18%;">Mutu</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for mk in sem.courses %}
+                  <tr>
+                    <td>{{ mk.kode_mk }}</td>
+                    <td>{{ mk.nama_mk }}</td>
+                    <td class="text-center">{{ mk.sks }}</td>
+                    <td class="text-center">{{ mk.nilai }}</td>
+                    <td class="text-right">{{ "%.2f"|format(mk.mutu) }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div class="semester-meta">
+              Total SKS Semester: {{ sem.total_sks }} &nbsp;|&nbsp; IPS: {{ "%.2f"|format(sem.ips) }}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-center">Belum ada data nilai mata kuliah yang tercatat.</p>
+      {% endif %}
+
+      <div class="footer-summary">
+        <table class="summary-table">
+          <tr>
+            <td class="label">Total SKS</td>
+            <td class="val">{{ transcript.summary.total_sks }}</td>
+          </tr>
+          <tr>
+            <td class="label">IPK</td>
+            <td class="val">{{ "%.2f"|format(transcript.summary.ipk) }}</td>
+          </tr>
+          <tr>
+            <td class="label">Predikat</td>
+            <td class="val">{{ transcript.summary.predikat }}</td>
+          </tr>
+        </table>
+
+        <div class="signature-box">
+          <div class="signature-role">TTD Dekan</div>
+          <div class="signature-line">Dekan Fakultas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
